@@ -1,3 +1,9 @@
+This is a clone from git://github.com/mit-pdos/xv6-public.git made on 28 Aug 2018.  
+This clone of xv6 will have some modifications used in the fall 2018 offering
+of CS 471/571 Operating Systems at Indiana State University, taught by Jeff Kinne.
+
+--------------------- original xv6 README follows ------------------------
+
 xv6 is a re-implementation of Dennis Ritchie's and Ken Thompson's Unix
 Version 6 (v6).  xv6 loosely follows the structure and style of v6,
 but is implemented for a modern x86-based multiprocessor using ANSI C.
