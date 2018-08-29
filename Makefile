@@ -32,7 +32,8 @@ OBJS = \
 # TOOLPREFIX = i386-jos-elf
 
 # Using native tools (e.g., on X86 Linux)
-#TOOLPREFIX = 
+# ISU-f2018 - Compile on the CS server, so yes this is the one
+TOOLPREFIX = 
 
 # Try to infer the correct TOOLPREFIX if not set
 ifndef TOOLPREFIX
@@ -52,6 +53,10 @@ endif
 
 # If the makefile can't find QEMU, specify its path here
 # QEMU = qemu-system-i386
+# ISU-f2018 - do your compiling while on the CS server or in one of the 
+#             CS labs, and this will work (as of fall 2018)
+QEMU = /u1/junk/qemu-3.0.0/i386-softmmu/qemu-system-i386
+
 
 # Try to infer the correct QEMU
 ifndef QEMU
