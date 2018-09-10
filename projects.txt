@@ -1,0 +1,21 @@
+Project ideas...
+
+** Memory ** 
+1. realloc - implement it
+2. page table/directory print
+3. free (how much free memory)
+4. mem usage per process
+5. Different allocation algorithm.  buddy system could be implemented.  what algorithm does xv6 use?
+
+
+** CPU/Process **
+1. procDump - dump everything in a struct proc given the pid
+2. procStats - add to the struct proc to keep stats - user/system/etc. time
+
+
+** Disk **
+1. FS checker - total used space, etc.  Or du/df
+
+
+** Other/Init **
+1. Putting programs into /bin directory and having shell look for for them
