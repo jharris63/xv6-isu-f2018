@@ -163,6 +163,7 @@ mkfs: mkfs.c fs.h
 # http://www.gnu.org/software/make/manual/html_node/Chained-Rules.html
 .PRECIOUS: %.o
 
+# ISU-f2018 - added some programs - primes, memory, add, fault, mem_huge, my_usage
 UPROGS=\
 	_cat\
 	_echo\
@@ -174,6 +175,11 @@ UPROGS=\
 	_ls\
 	_mkdir\
 	_primes\
+	_memory\
+	_add\
+	_fault\
+	_mem_huge\
+	_my_usage\
 	_rm\
 	_sh\
 	_stressfs\
@@ -246,9 +252,12 @@ qemu-nox-gdb: fs.img xv6.img .gdbinit
 # rename it to rev0 or rev1 or so on and then
 # check in that version.
 
+# ISU-f2018 - added some source files - primes.c, memory.c, add.c, fault.c, mem_huge.c, my_usage.c
 EXTRA=\
 	mkfs.c ulib.c user.h cat.c echo.c forktest.c grep.c kill.c\
-	ln.c ls.c mkdir.c primes.c rm.c stressfs.c usertests.c wc.c zombie.c\
+	ln.c ls.c mkdir.c\
+	primes.c memory.c add.c fault.c mem_huge.c my_usage.c\
+	rm.c stressfs.c usertests.c wc.c zombie.c\
 	printf.c umalloc.c\
 	README dot-bochsrc *.pl toc.* runoff runoff1 runoff.list\
 	.gdbinit.tmpl gdbutil\

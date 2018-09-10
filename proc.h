@@ -51,6 +51,11 @@ struct proc {
   char name[16];               // Process name (debugging)
 };
 
+// ISU-f2018
+struct proc_usage {
+  uint memory_size;
+};
+
 // Process memory is laid out contiguously, low addresses first:
 //   text
 //   original data and bss
