@@ -516,6 +516,8 @@ procdump(void)
   char *state;
   uint pc[10];
 
+  // ISU-f2018 - print a header
+  cprintf("pid state name memsize kstack pgdir [getcallerpcs...]\n");
   for(p = ptable.proc; p < &ptable.proc[NPROC]; p++){
     if(p->state == UNUSED)
       continue;
@@ -523,7 +525,9 @@ procdump(void)
       state = states[p->state];
     else
       state = "???";
-    cprintf("%d %s %s", p->pid, state, p->name);
+    // ISU-f2018 - also print mem size and a few other things
+    //cprintf("%d %s %s", p->pid, state, p->name);
+    cprintf("%d %s %s %d %p", p->pid, state, p->name, p->sz, p->kstack, p->pgdir);
     if(p->state == SLEEPING){
       getcallerpcs((uint*)p->context->ebp+2, pc);
       for(i=0; i<10 && pc[i] != 0; i++)

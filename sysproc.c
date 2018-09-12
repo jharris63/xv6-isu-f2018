@@ -6,6 +6,11 @@
 #include "memlayout.h"
 #include "mmu.h"
 #include "proc.h"
+// ISU-f2018, added so can print inode information for debugging
+#include "spinlock.h"
+#include "sleeplock.h"
+#include "fs.h"
+#include "file.h"
 
 int
 sys_fork(void)
@@ -88,4 +93,64 @@ sys_uptime(void)
   xticks = ticks;
   release(&tickslock);
   return xticks;
+}
+
+// ISU-f2018
+void
+mem_dump(void)
+{
+  //struct proc *p = myproc();
+  // here!
+  cprintf(" -- mem dump\n");
+  
+  cprintf(" mem dump --\n");
+}
+
+// ISU-f2018
+void
+proc_dump(void)
+{
+  struct proc *p = myproc();
+  cprintf(" -- struct proc dump\n");
+  cprintf(" sz\t%d\n",p->sz);
+  cprintf(" pgdir\t%p\n",p->pgdir);
+  cprintf(" kstack\t%p\n",p->kstack);
+  cprintf(" state\t%d\n",p->state);
+  cprintf(" pid\t%d\n",p->pid);
+  if (p->parent != 0)
+    cprintf(" parent\t%p, %s\n",p->parent, p->parent->name);
+  else
+    cprintf(" parent\t0\n");
+  cprintf(" tf\t%p\n",p->tf);
+  cprintf(" context\t%p\n",p->context);
+  cprintf(" chan\t%p\n",p->chan);
+  cprintf(" killed\t%d\n",p->killed);
+  cprintf(" ofile\t%p\n",p->ofile);
+  if (p->cwd != 0)
+    cprintf(" cwd\t%p - dev %d, inum %d\n",p->cwd,p->cwd->dev,p->cwd->inum);
+  else
+    cprintf(" cwd\t0\n");
+  cprintf(" name\t%s\n",p->name);
+  cprintf(" struct proc dump --\n");
+}
+
+
+// ISU-f2018
+int
+sys_usage(void)
+{
+  // cprintf("Hello World.\n");
+  struct proc_usage *u;
+  if (argptr(0, (char **) &u, sizeof(struct proc_usage)) < 0)
+    return -1;
+
+  u->memory_size = myproc()->sz;
+
+  // debug print proc state...
+  if (1) {
+    proc_dump();
+    mem_dump();
+  }
+  
+  return 0;
 }
