@@ -16,7 +16,7 @@ int
 main(int argc, char *argv[])
 {
   struct proc_usage u;
-  printf(1, "Running my system call...\n");
+  printf(1, "Running my system call ...\n");
   usage(&u);
   printf(1, " memory_size = %d\n", u.memory_size);
   
