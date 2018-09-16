@@ -154,3 +154,36 @@ sys_usage(void)
   
   return 0;
 }
+
+struct { //copied from proc.c for system_load
+  struct spinlock lock;
+  struct proc proc[NPROC];
+} ptable;
+
+//Joseph Harris ISU-f2018
+//load system information
+//access the process table and find used processes, memory used by the processes
+//and the number of cpus running on the system
+int sys_system_load(void)
+{
+  //cprintf("Hello, world!\n");
+  struct system_info *si;
+  struct proc *p;
+
+  if (argptr(0, (char**) &si, sizeof(struct system_info)) < 0) 
+    return -1;
+
+  //basically the first quarter of allocproc()
+  acquire(&ptable.lock);
+
+  for(p = ptable.proc; p < &ptable.proc[NPROC]; p++) //go through the process
+    if(p->state != UNUSED) {			     //table.
+      si->num_procs++;				     //as long as proc isn't UNUSED, keep track of it
+      si->uvm_used+=p->sz;			     //add the processes size (sz) to the running total in si->uvm_used
+    }
+
+  si->num_cpus = ncpu;				     //ncpu is a global declared in proc.h and calculated in mp.c
+  release(&ptable.lock);
+
+  return 0;
+}
