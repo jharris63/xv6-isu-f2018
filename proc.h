@@ -1,3 +1,6 @@
+#define PAGE_DIR_DUMP_POINTER	0x1
+#define PAGE_DIR_DUMP_FREE	0x2
+#define PAGE_DIR_DUMP_TABLES	0x3
 // Per-CPU state
 struct cpu {
   uchar apicid;                // Local APIC ID

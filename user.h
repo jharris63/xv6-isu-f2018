@@ -26,7 +26,8 @@ char* sbrk(int);
 int sleep(int);
 int uptime(void);
 int usage(struct proc_usage *);
-int system_load(struct system_info *);
+int system_load(struct system_info *);// Joseph Harris ISU-f2018
+char * page_dir_dump(char*, int);
 
 // ulib.c
 int stat(char*, struct stat*);
